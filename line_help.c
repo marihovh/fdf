@@ -16,8 +16,10 @@ void	color(t_point *a, t_point *b)
 {
 	if ((int)(a->z == 0) && (int)(b->z == 0))
 		a->color = 0xffffff;
-	else
-		a->color = 0xe42313;
+	else if (a->z > 20)
+		a->color = a->z + 0xffffff;
+	else 
+		a->color = 0x3273a8;
 }
 
 int	max(int a, int b)

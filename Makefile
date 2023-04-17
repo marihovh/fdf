@@ -2,11 +2,11 @@ NAME=fdf
 HEADER=fdf.h 
 SRC=$(wildcard *.c)
 OBJ=$(SRC:.c=.o)
-FRAME_FLAGS = -lmlx -framework OpenGL -framework AppKit
+FRAME_FLAGS = -lmlx -framework OpenGL -framework AppKit -g
 G_FLAG = -Imlx
 CC=cc
 LIBFT = libft/libft.a
-CFLAGS= -Wall -Werror -Wextra
+CFLAGS= -Wall -Werror -Wextra -fsanitize=address -g
 RM=rm -f
 
 all : $(NAME)

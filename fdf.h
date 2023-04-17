@@ -41,7 +41,9 @@ struct	s_fdf
 	int		mv_lr;
 	int		mv_updn;
 	float	ang;
-
+	int 	win_w;
+	int		win_h;
+	t_img	img;
 	void	*mlx_ptr;
 	void	*win_ptr;
 };
@@ -55,7 +57,7 @@ struct s_point
 };
 
 int		max(int a, int b);
-void	draw_map(t_fdf *data, t_img img);
+void	draw_map(t_fdf *data);
 char	*get_next_line(int fd);
 int		get_widht(char *file_name);
 int		get_height(char *file_name);
@@ -65,8 +67,8 @@ int		ft_gradient(t_point *a, t_point *b);
 void	read_map(char *file_name, t_fdf *data);
 void	z_is(t_fdf *data, t_point *a, t_point *b);
 void	zooming(t_fdf *data, t_point *a, t_point *b);
-void	draw_line(t_fdf *data, t_point a, t_point b, t_img img);
+void	draw_line(t_fdf *data, t_point a, t_point b);
 void	isometric(t_fdf *data, t_point *a, t_point *b);
-void	my_mlx_pixel_put(t_img *data, int x, int y, int color);
+void	my_mlx_pixel_put(t_fdf *data, int x, int y, int color);
 
 #endif

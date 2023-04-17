@@ -20,7 +20,7 @@ void	move(t_fdf *data, t_point *a, t_point *b)
 	b->y += data->mv_updn;
 }
 
-void	draw_line(t_fdf *data, t_point a, t_point b, t_img img)
+void	draw_line(t_fdf *data, t_point a, t_point b)
 {
 	float	dx;
 	float	dy;
@@ -38,7 +38,7 @@ void	draw_line(t_fdf *data, t_point a, t_point b, t_img img)
 	while ((int)(a.x - b.x) || (int)(a.y - b.y))
 	{
 		color(&a, &b);
-		my_mlx_pixel_put(&img, a.x, a.y, a.color);
+		my_mlx_pixel_put(data, a.x, a.y, a.color);
 		a.x += dx;
 		a.y += dy;
 	}
@@ -46,35 +46,39 @@ void	draw_line(t_fdf *data, t_point a, t_point b, t_img img)
 
 void	draw(t_fdf *data, t_point *a, t_point *b, t_img img)
 {
-	a->x = -1;
-	while (++a->x < data->widht)
+	a->y = -1;
+	while (++a->y < data->height)
 	{
-		if (a->x < data->widht - 1)
+		a->x = -1;
+		while (++a->x < data->widht)
 		{
-			b->x = a->x + 1;
-			b->y = a->y;
-			draw_line(data, *a, *b, img);
-		}
-		if (a->y < data->height - 1)
-		{
-			b->x = a->x;
-			b->y = a->y + 1;
-			draw_line(data, *a, *b, img);
+			if (a->x < data->widht - 1)
+			{
+				b->x = a->x + 1;
+				b->y = a->y;
+				draw_line(data, *a, *b);
+			}
+			if (a->y < data->height - 1)
+			{
+				b->x = a->x;
+				b->y = a->y + 1;
+				draw_line(data, *a, *b);
+			}
 		}
 	}
 }
 
-void	draw_map(t_fdf *data, t_img img)
+void	draw_map(t_fdf *data)
 {
 	t_point	*a;
 	t_point	*b;
 
+	data->img.img = mlx_new_image(data->mlx_ptr, data->win_w, data->win_h);
+	data->img.addr = mlx_get_data_addr(data->img.img, &data->img.bits_per_pixel, &data->img.line_length, &data->img.endian);
 	a = malloc(sizeof(t_point));
 	b = malloc(sizeof(t_point));
-	a->y = -1;
-	while (++a->y < data->height)
-		draw(data, a, b, img);
-	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, img.img, 0, 0);
+	draw(data, a, b, data->img);
+	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img.img, 0, 0);
 	free(a);
 	free(b);
 }
