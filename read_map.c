@@ -16,11 +16,19 @@ int	get_height(char *file_name)
 {
 	int	height;
 	int	fd;
+	char *str;
 
 	fd = open(file_name, O_RDONLY);
 	height = 0;
-	while (get_next_line(fd))
+	str = get_next_line(fd);
+	if (!str)
+		return (0);
+	while (str)
+	{
 		height++;
+		free(str);
+		str = get_next_line(fd);
+	}
 	close (fd);
 	return (height);
 }
@@ -35,6 +43,7 @@ int	get_widht(char *file_name)
 	fd = open(file_name, O_RDONLY);
 	line = get_next_line(fd);
 	widht = ft_word_cnt(line, ' ');
+	free(line);
 	close(fd);
 	return (widht);
 }
@@ -46,9 +55,11 @@ void	fill(char *line, int *z_map)
 
 	i = -1;
 	splited = ft_split(line, ' ');
+
 	while (splited[++i])
 	{
 		z_map[i] = ft_atoi(splited[i]);
+		free(splited[i]);
 	}
 	free(splited);
 }
@@ -57,22 +68,23 @@ void	read_map(char *file_name, t_fdf *data)
 {
 	int		fd;
 	int		i;
-	char	*line;
+	char *line;
 
 	fd = open(file_name, O_RDONLY);
 	i = 0;
 	data->height = get_height(file_name);
 	data->widht = get_widht(file_name);
-	data->z_map = (int **)malloc(sizeof(int *) * (data->widht + 1));
+	data->z_map = (int **)malloc(sizeof(int *) * (data->height));
 	while (i <= data->height)
-		data->z_map[i++] = (int *)malloc(sizeof(int *) * (data->widht + 1));
+		data->z_map[i++] = (int *)malloc(sizeof(int *) * (data->widht));
 	i = 0;
-	while (i < data->height)
+	while (i <= data->height)
 	{
 		line = get_next_line(fd);
 		if (!line)
 			break ;
 		fill(line, data->z_map[i]);
+		free(line);
 		i++;
 	}
 	close(fd);

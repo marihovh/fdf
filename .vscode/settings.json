@@ -17,6 +17,7 @@
         "bitset": "c",
         "initializer_list": "c",
         "memory": "c",
-        "unordered_map": "c"
+        "unordered_map": "c",
+        "ratio": "c"
     }
 }

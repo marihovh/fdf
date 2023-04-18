@@ -17,7 +17,7 @@ void	color(t_point *a, t_point *b)
 	if ((int)(a->z == 0) && (int)(b->z == 0))
 		a->color = 0xffffff;
 	else if (a->z > 20)
-		a->color = a->z + 0xffffff;
+		a->color = a->z + 0x3273a8;
 	else 
 		a->color = 0x3273a8;
 }
@@ -31,12 +31,15 @@ int	max(int a, int b)
 
 void	zooming(t_fdf *data, t_point *a, t_point *b)
 {
-	a->x *= data->zoom;
-	a->y *= data->zoom;
-	b->x *= data->zoom;
-	b->y *= data->zoom;
-	// a->z *= data->zoom;
-	// b->z *= data->zoom;
+	if (data->zoom > 0)
+	{
+		a->x *= data->zoom;
+		a->y *= data->zoom;
+		b->x *= data->zoom;
+		b->y *= data->zoom;
+	}
+	else 
+		data->zoom = 0;
 }
 
 void	isometric(t_fdf *data, t_point *a, t_point *b)
