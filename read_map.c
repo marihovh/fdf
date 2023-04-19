@@ -6,7 +6,7 @@
 /*   By: marihovh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 18:06:16 by marihovh          #+#    #+#             */
-/*   Updated: 2023/04/08 07:35:13 by marihovh         ###   ########.fr       */
+/*   Updated: 2023/04/19 21:00:08 by marihovh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 int	get_height(char *file_name)
 {
-	int	height;
-	int	fd;
-	char *str;
+	int		height;
+	int		fd;
+	char	*str;
 
 	fd = open(file_name, O_RDONLY);
 	height = 0;
@@ -55,7 +55,6 @@ void	fill(char *line, int *z_map)
 
 	i = -1;
 	splited = ft_split(line, ' ');
-
 	while (splited[++i])
 	{
 		z_map[i] = ft_atoi(splited[i]);
@@ -68,24 +67,23 @@ void	read_map(char *file_name, t_fdf *data)
 {
 	int		fd;
 	int		i;
-	char *line;
+	char	*line;
 
 	fd = open(file_name, O_RDONLY);
-	i = 0;
+	i = -1;
 	data->height = get_height(file_name);
 	data->widht = get_widht(file_name);
 	data->z_map = (int **)malloc(sizeof(int *) * (data->height));
-	while (i <= data->height)
-		data->z_map[i++] = (int *)malloc(sizeof(int *) * (data->widht));
-	i = 0;
-	while (i <= data->height)
+	while (++i < data->height)
+		data->z_map[i] = (int *)malloc(sizeof(int *) * (data->widht));
+	i = -1;
+	while (++i < data->height)
 	{
 		line = get_next_line(fd);
 		if (!line)
 			break ;
 		fill(line, data->z_map[i]);
 		free(line);
-		i++;
 	}
 	close(fd);
 }

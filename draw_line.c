@@ -6,7 +6,7 @@
 /*   By: marihovh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 18:05:09 by marihovh          #+#    #+#             */
-/*   Updated: 2023/04/08 08:13:01 by marihovh         ###   ########.fr       */
+/*   Updated: 2023/04/19 15:47:31 by marihovh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,8 @@ void	draw_map(t_fdf *data)
 	t_point	*b;
 
 	data->img.img = mlx_new_image(data->mlx_ptr, data->win_w, data->win_h);
-	data->img.addr = mlx_get_data_addr(data->img.img, &data->img.bits_per_pixel, &data->img.line_length, &data->img.endian);
+	data->img.addr = mlx_get_data_addr(data->img.img, &data->img.bits_per_pixel,
+			&data->img.line_length, &data->img.endian);
 	a = malloc(sizeof(t_point));
 	b = malloc(sizeof(t_point));
 	draw(data, a, b, data->img);

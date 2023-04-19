@@ -6,7 +6,7 @@
 /*   By: marihovh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 03:49:50 by marihovh          #+#    #+#             */
-/*   Updated: 2023/04/08 08:20:31 by marihovh         ###   ########.fr       */
+/*   Updated: 2023/04/19 13:59:38 by marihovh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ struct	s_fdf
 	int		mv_lr;
 	int		mv_updn;
 	float	ang;
-	int 	win_w;
+	int		win_w;
 	int		win_h;
 	t_img	img;
 	void	*mlx_ptr;
@@ -62,13 +62,17 @@ char	*get_next_line(int fd);
 int		get_widht(char *file_name);
 int		get_height(char *file_name);
 void	color(t_point *a, t_point *b);
+void	key_if(int keycode, t_fdf *data);
 int		ft_word_cnt(char const *s, char c);
 int		ft_gradient(t_point *a, t_point *b);
 void	read_map(char *file_name, t_fdf *data);
 void	z_is(t_fdf *data, t_point *a, t_point *b);
 void	zooming(t_fdf *data, t_point *a, t_point *b);
 void	draw_line(t_fdf *data, t_point a, t_point b);
+int		key_hook(int keycode, t_fdf *data, t_img img);
+int		key_cross(t_fdf *data, int keycode, t_img img);
 void	isometric(t_fdf *data, t_point *a, t_point *b);
+void	my_mlx_pixel_put(t_fdf *data, int x, int y, int color);
 void	my_mlx_pixel_put(t_fdf *data, int x, int y, int color);
 
 #endif

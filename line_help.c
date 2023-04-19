@@ -6,7 +6,7 @@
 /*   By: marihovh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 07:35:31 by marihovh          #+#    #+#             */
-/*   Updated: 2023/04/08 07:37:30 by marihovh         ###   ########.fr       */
+/*   Updated: 2023/04/19 15:51:04 by marihovh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	color(t_point *a, t_point *b)
 		a->color = 0xffffff;
 	else if (a->z > 20)
 		a->color = a->z + 0x3273a8;
-	else 
+	else
 		a->color = 0x3273a8;
 }
 
@@ -38,7 +38,7 @@ void	zooming(t_fdf *data, t_point *a, t_point *b)
 		b->x *= data->zoom;
 		b->y *= data->zoom;
 	}
-	else 
+	else
 		data->zoom = 0;
 }
 
